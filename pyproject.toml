@@ -18,6 +18,7 @@ flake8 = "^7.1.1"
 isort = "^5.13.2"
 black = "^24.8.0"
 pytest = "^8.3.3"
+coverage = "^7.6.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -77,3 +78,14 @@ testpaths = [
     "tests",
     "integration",
 ]
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+omit = [
+    "tests/*",
+    "*/__init__.py"
+]
+
+[tool.coverage.report]
+show_missing = true

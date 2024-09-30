@@ -20,6 +20,7 @@ class TestOOP(unittest.TestCase):
 
     def test_always_true(self) -> None:
         """Test that the always_true method returns True."""
+        self.oop_test.always_10()
         self.assertTrue(self.oop_test.always_true())
 
     def test_always_false(self) -> None:

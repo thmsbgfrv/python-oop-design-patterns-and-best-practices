@@ -21,7 +21,7 @@ repos:
       - id: pylint
         name: pylint
         entry: poetry run pylint
-        language: python
+        language: system
         types: [python]
         require_serial: true
         args: ["-rn", "-sn"]  # Only display messages, don't display the score
@@ -29,33 +29,42 @@ repos:
       - id: mypy
         name: mypy
         entry: poetry run mypy
-        language: python
+        language: system
         types: [python]
 
       - id: flake8
         name: flake8
         entry: poetry run flake8
-        language: python
+        language: system
         types: [python]
 
       - id: isort
         name: isort
         entry: poetry run isort
-        language: python
+        language: system
         types: [python]
 
       - id: pytest
         name: pytest
         entry: poetry run pytest
-        language: python
-        types: [python]
-        pass_filenames: false
-        always_run: true  # Ensure it runs regardless of changes
-
-      - id: unittest
-        name: unittest
-        entry: poetry run python -m unittest discover -p '*_unittest.py'
         language: system
         types: [python]
         pass_filenames: false
         always_run: true  # Ensure it runs regardless of changes
+
+      - id: coverage
+        name: coverage
+        entry: poetry run coverage run -m pytest tests
+        language: system
+        types: [ python ]
+        pass_filenames: false
+        always_run: true
+
+# if we have pytest we dont need this
+#      - id: unittest
+#        name: unittest
+#        entry: poetry run python -m unittest discover -p '*_unittest.py'
+#        language: system
+#        types: [python]
+#        pass_filenames: false
+#        always_run: true  # Ensure it runs regardless of changes

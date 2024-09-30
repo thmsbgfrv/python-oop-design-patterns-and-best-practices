@@ -21,3 +21,9 @@ class OOP:
         Method that always returns False.
         """
         return False
+
+    def always_10(self) -> int:
+        """
+        test
+        """
+        return 10
