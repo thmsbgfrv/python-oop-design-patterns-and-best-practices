@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to the branch you want to trigger the workflow
+  pull_request:
+    branches:
+      - main  # Adjust this to the branch you want to trigger the workflow
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run pre-commit hooks
+      run: poetry run pre-commit run --all-files
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: pre-commit  # This job runs after the pre-commit job
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run pylint
+      run: poetry run pylint .  # Adjust to the directory you want to lint
+
+    - name: Run mypy
+      run: poetry run mypy .  # Adjust to the directory you want to type check
+
+    - name: Run flake8
+      run: poetry run flake8 .  # Adjust to the directory you want to check
+
+    - name: Run isort
+      run: poetry run isort .  # Adjust to the directory you want to format
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint  # This job runs after the lint job
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run tests
+      run: poetry run pytest tests  # Adjust to your test directory
