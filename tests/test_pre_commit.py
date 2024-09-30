@@ -1,5 +1,4 @@
 # tests/test_pre_commit.py
-
 """
 Unit tests for the pre-commit hooks.
 """
