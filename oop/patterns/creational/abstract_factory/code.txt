@@ -1,0 +1,24 @@
+def client_code(factory: AbstractFactory) -> None:
+    """
+    The client code works with factories and products only through abstract
+    types: AbstractFactory and AbstractProduct. This lets you pass any factory
+    or product subclass to the client code without breaking it.
+    """
+    transport = factory.create_transport()
+    packaging = factory.create_packaging()
+
+    print(transport.deliver())
+    print(packaging.package(), end="")
+
+
+if __name__ == "__main__":
+    """
+    The client code can work with any concrete factory class.
+    """
+    print("Client: Testing client code with the Road Logistics factory:")
+    client_code(RoadLogisticsFactory())
+
+    print("\n")
+
+    print("Client: Testing the same client code with the Sea Logistics factory:")
+    client_code(SeaLogisticsFactory())
