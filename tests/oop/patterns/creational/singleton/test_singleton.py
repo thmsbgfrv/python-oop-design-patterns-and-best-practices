@@ -1,10 +1,9 @@
-# tests/oop/patterns/creational/test_singleton.py
-
+# tests/oop/patterns/creational/singleton/test_singleton.py
 """
 Tests for the Singleton class.
 """
 
-from oop.patterns.creational.singleton import Singleton
+from oop.patterns.creational.singleton.singleton import Singleton
 
 
 class TestSingleton:

@@ -1,4 +1,4 @@
-# tests/oop/patterns/creational/test_singleton_naive.py
+# tests/oop/patterns/creational/singleton/test_singleton_naive_thread_safe.py
 
 """
 Tests for the Singleton with naive and Thread Safe Solution
@@ -7,7 +7,7 @@ Tests for the Singleton with naive and Thread Safe Solution
 from threading import Thread
 from typing import List
 
-from oop.patterns.creational.singleton_naive_thread_safe import (
+from oop.patterns.creational.singleton.singleton_naive_thread_safe import (
     Singleton,
     SingletonNaiveThreadSafe,
     SingletonNaiveThreadSafe2,

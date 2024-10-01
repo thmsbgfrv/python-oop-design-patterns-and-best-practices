@@ -1,10 +1,10 @@
-# tests/oop/patterns/creational/test_singleton_naive.py
+# tests/oop/patterns/creational/singleton/test_singleton_naive.py
 
 """
 Tests for the SingletonNaive class. With Naive Solution
 """
 
-from oop.patterns.creational.singleton_naive import Singleton, SingletonNaive, SingletonNaive2
+from oop.patterns.creational.singleton.singleton_naive import Singleton, SingletonNaive, SingletonNaive2
 
 
 class TestSingletonNaive:
