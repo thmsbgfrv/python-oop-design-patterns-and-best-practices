@@ -31,10 +31,6 @@ class SingletonNaive(metaclass=Singleton):
     def __init__(self, name: str) -> None:
         self.name = name
 
-    def __str__(self) -> str:
-        """Some Business Logic in Singleton"""
-        return self.name
-
 
 class SingletonNaive2(metaclass=Singleton):
     """
@@ -44,7 +40,3 @@ class SingletonNaive2(metaclass=Singleton):
 
     def __init__(self, name: str) -> None:
         self.name = name
-
-    def __str__(self) -> str:
-        """Some Business Logic in Singleton"""
-        return self.name
