@@ -8,16 +8,15 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 pydantic = "^2.9.2"
-pytest = "^8.3.3"
+flake8 = "^7.1.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
 pylint = "^3.3.1"
 mypy = "^1.11.2"
-flake8 = "^7.1.1"
 isort = "^5.13.2"
 black = "^24.8.0"
-pytest = "^8.3.3"
+pytest = "^8.3.3"  # Kept here as a dev dependency
 coverage = "^7.6.1"
 
 [build-system]
@@ -25,7 +24,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
-strict= true
+strict = true
 python_version = "3.12"
 check_untyped_defs = true
 ignore_missing_imports = true
@@ -33,7 +32,6 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 
-# Modules for ignoring
 [[tool.mypy.overrides]]
 module = "*.migrations.*"
 ignore_errors = true
@@ -42,9 +40,7 @@ ignore_errors = true
 
 [tool.black]
 line-length = 120
-target-version = [
-  'py312',
-]
+target-version = ['py312']
 
 # ==== isort ====
 
@@ -52,20 +48,9 @@ target-version = [
 profile = "black"
 line_length = 120
 known_first_party = [
-  "tests",
-  "scripts",
-  "hooks",
-]
-
-[tool.flake8]
-max-line-length = 120
-exclude = [
-    ".git",
-    "__pycache__",
-    ".venv"
-]
-extend-ignore = [
-    "E203"
+    "tests",
+    "scripts",
+    "hooks",
 ]
 
 [tool.pylint]
@@ -89,3 +74,13 @@ omit = [
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+# TODO remove this from here because it seems not worked properly
+#exclude = [
+#    ".git",
+#    "__pycache__",
+#    ".venv"
+#]
