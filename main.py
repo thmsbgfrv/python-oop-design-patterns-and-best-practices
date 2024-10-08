@@ -7,3 +7,4 @@ if __name__ == "__main__":
     runner.run_singleton()
     runner.run_factory()
     runner.run_abstract_factory()
+    runner.run_prototype()
