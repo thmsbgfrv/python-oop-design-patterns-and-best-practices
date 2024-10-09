@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 
 class AbstractTransport(ABC):
     """Abstract Transport Abstract Class"""
-    # pylint: disable=too-few-public-methods
 
     @abstractmethod
     def deliver(self) -> str:
@@ -13,7 +12,6 @@ class AbstractTransport(ABC):
 
 class TruckTransport(AbstractTransport):
     """Truck Transport Class"""
-    # pylint: disable=too-few-public-methods
 
     def deliver(self) -> str:
         """deliver method for truck"""
@@ -22,7 +20,6 @@ class TruckTransport(AbstractTransport):
 
 class SeaTransport(AbstractTransport):
     """Sear Transport Class"""
-    # pylint: disable=too-few-public-methods
 
     def deliver(self) -> str:
         """deliver method for SeaTransport"""

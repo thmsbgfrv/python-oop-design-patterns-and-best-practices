@@ -4,6 +4,7 @@ from oop.patterns.creational.abstract_factory.logistics import (
     RoadLogisticsFactory,
     SeaLogisticsFactory,
 )
+from oop.patterns.creational.builder.builder import Car, CarBuilder
 from oop.patterns.creational.factory.logistic.logistics import Logistics
 from oop.patterns.creational.factory.logistic.road_logistics import RoadLogistics
 from oop.patterns.creational.factory.logistic.ship_logistics import ShipLogistics
@@ -15,6 +16,13 @@ from oop.utils.decorators.fancy_print import fancy_print
 
 class PattersRunner:
     """PatternsRunner to run each pattern manually"""
+    def run_all(self) -> None:
+        """Run all Patterns Example Manual"""
+        self.run_singleton()
+        self.run_factory()
+        self.run_abstract_factory()
+        self.run_prototype()
+        self.run_builder()
 
     @fancy_print
     def run_singleton(self) -> None:
@@ -160,3 +168,13 @@ class PattersRunner:
             "^^ This shows that deepcopied objects contain same reference, they "
             "are not cloned repeatedly."
         )
+
+    @fancy_print
+    def run_builder(self) -> None:
+        """Run builder design pattern"""
+        car_builder: CarBuilder = CarBuilder()
+        car: Car = (car_builder
+                    .set_model("Tesla")
+                    .set_year(2023)
+                    .build())
+        print(car)

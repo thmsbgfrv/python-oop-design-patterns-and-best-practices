@@ -9,7 +9,6 @@ class Singleton:
     """
     Singleton Class that ensures only one instance of itself is created.
     """
-    # pylint: disable=too-few-public-methods
 
     __instance: Optional["Singleton"] = None  # Store the singleton instance
     config: Dict[str, str] = {"db": "test"}  # Example configuration dictionary

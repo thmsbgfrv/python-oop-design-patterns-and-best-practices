@@ -4,7 +4,6 @@ from abc import ABC, abstractmethod
 
 class AbstractPackaging(ABC):
     """Abstract Packaging Class"""
-    # pylint: disable=too-few-public-methods
 
     @abstractmethod
     def package(self) -> str:
@@ -13,7 +12,6 @@ class AbstractPackaging(ABC):
 
 class BoxPackaging(AbstractPackaging):
     """Box Packaging Class"""
-    # pylint: disable=too-few-public-methods
 
     def package(self) -> str:
         """Implementing Package Method for Box Packaging"""
@@ -22,7 +20,6 @@ class BoxPackaging(AbstractPackaging):
 
 class ContainerPackaging(AbstractPackaging):
     """Container Packaging Class"""
-    # pylint: disable=too-few-public-methods
 
     def package(self) -> str:
         """Implementing Package Method for Container Packaging"""

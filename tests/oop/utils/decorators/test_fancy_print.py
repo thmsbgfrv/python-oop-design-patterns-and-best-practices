@@ -8,7 +8,6 @@ from oop.utils.decorators.fancy_print import fancy_print
 
 class MyClass:
     """Example Class to test decorator"""
-    # pylint: disable=too-few-public-methods
 
     @fancy_print
     def my_method(self) -> str:

@@ -7,7 +7,6 @@ from typing import Any, Optional
 class Prototype(ABC):
     """Prototype interface for to implement this pattern"""
 
-    # pylint: disable=too-few-public-methods
     @abstractmethod
     def clone(self) -> Any:
         """Deep Copy"""
@@ -20,7 +19,6 @@ class Prototype(ABC):
 class SelfReferencingEntity:
     """Self Referencing Entity will be used as test for our design Pattern"""
 
-    # pylint: disable=too-few-public-methods
     def __init__(self) -> None:
         """Constructor which create object with parent=None as default"""
         self.parent: Optional["SomeComponent"] = None
@@ -33,7 +31,6 @@ class SelfReferencingEntity:
 class SomeComponent(Prototype):
     """Component to implement prototype pattern"""
 
-    # pylint: disable=too-few-public-methods
     def __init__(self,
                  some_int: int,
                  some_list_of_objects: list[int | set[int] | list[int]],

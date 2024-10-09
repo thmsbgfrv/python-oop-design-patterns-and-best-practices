@@ -8,7 +8,7 @@ from typing import Any, Dict, Type
 
 class Singleton(type):
     """I am using metaclass approach for creating Singleton Naive Thread Safe Class"""
-    # pylint: disable=too-few-public-methods
+
     __instances: Dict[Type[Any], Any] = {}
     __lock: Lock = Lock()
 
@@ -30,7 +30,6 @@ class SingletonNaiveThreadSafe(metaclass=Singleton):
     """
     SingletonNaiveThreadSafe Class that ensures only one instance of itself is created.
     """
-    # pylint: disable=too-few-public-methods
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -40,7 +39,6 @@ class SingletonNaiveThreadSafe2(metaclass=Singleton):
     """
     SingletonNaiveThreadSafe2 Class that ensures only one instance of itself is created.
     """
-    # pylint: disable=too-few-public-methods
 
     def __init__(self, name: str) -> None:
         self.name = name

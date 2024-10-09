@@ -6,8 +6,6 @@ from abc import ABC, abstractmethod
 class Transport(ABC):
     """Transport AbstractClass for using in factory design pattern"""
 
-    # pylint: disable=too-few-public-methods
-
     @abstractmethod
     def deliver(self) -> str:
         """Abstract Deliver Method must override in transports"""
