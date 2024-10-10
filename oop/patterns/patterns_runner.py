@@ -11,6 +11,7 @@ from oop.patterns.creational.factory.logistic.ship_logistics import ShipLogistic
 from oop.patterns.creational.prototype.prototype import SelfReferencingEntity, SomeComponent
 from oop.patterns.creational.singleton.singleton_naive import SingletonNaive
 from oop.patterns.creational.singleton.singleton_naive_thread_safe import SingletonNaiveThreadSafe
+from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, StripeAdapter, StripePayment
 from oop.utils.decorators.fancy_print import fancy_print
 
 
@@ -23,6 +24,19 @@ class PattersRunner:
         self.run_abstract_factory()
         self.run_prototype()
         self.run_builder()
+        self.run_adapter()
+
+    @fancy_print
+    def run_adapter(self) -> None:
+        """Run and Check Adapter"""
+
+        # Using PayPal
+        paypal_adapter = PayPalAdapter(PayPalPayment())
+        print(paypal_adapter.process_payment(50.0))  # Output: PayPal: Processed payment of $50.00
+
+        # Using Stripe
+        stripe_adapter = StripeAdapter(StripePayment())
+        print(stripe_adapter.process_payment(75.0))  # Output: Stripe: Charged $75.00
 
     @fancy_print
     def run_singleton(self) -> None:
