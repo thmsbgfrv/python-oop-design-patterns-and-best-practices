@@ -18,6 +18,7 @@ from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
 from oop.patterns.structural.composite import Directory, File
 from oop.patterns.structural.decorator import EmailNotification, Notification, SMSNotification
 from oop.patterns.structural.facade import VideoStreamingFacade
+from oop.patterns.structural.flyweight import CharacterFactory
 from oop.patterns.structural.proxy import BankAccountProxy, RealBankAccount
 from oop.utils.decorators.fancy_print import fancy_print
 
@@ -42,6 +43,21 @@ class PattersRunner:
     @fancy_print
     def run_flyweight(self) -> None:
         """Run and Check FlyWeight"""
+        factory = CharacterFactory()
+
+        # Create shared characters with different attributes
+        char_a_red = factory.get_character('A', 'Arial', 'Red')
+        char_a_blue = factory.get_character('A', 'Arial', 'Blue')
+        char_b_red = factory.get_character('B', 'Arial', 'Red')
+
+        # Display characters
+        char_a_red.display()
+        char_a_blue.display()
+        char_b_red.display()
+
+        # Show that shared instances are reused
+        char_a_red_again = factory.get_character('A', 'Arial', 'Red')
+        print("Is char_a_red the same as char_a_red_again?", char_a_red is char_a_red_again)  # Should be True
 
     @fancy_print
     def run_composite(self) -> None:
