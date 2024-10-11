@@ -26,6 +26,7 @@ from oop.utils.decorators.fancy_print import fancy_print
 class PattersRunner:
     """PatternsRunner to run each pattern manually"""
 
+    @fancy_print
     def run_all(self) -> None:
         """Run all Patterns Example Manual"""
         self.run_singleton()
