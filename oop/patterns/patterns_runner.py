@@ -15,6 +15,7 @@ from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, Stripe
 from oop.patterns.structural.bridge import CreditCardPayment, CryptoPayment, CryptoProcessor
 from oop.patterns.structural.bridge import PayPalPayment as PayPalPaymentBridge
 from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
+from oop.patterns.structural.composite import Directory, File
 from oop.patterns.structural.decorator import EmailNotification, Notification, SMSNotification
 from oop.patterns.structural.facade import VideoStreamingFacade
 from oop.patterns.structural.proxy import BankAccountProxy, RealBankAccount
@@ -45,6 +46,23 @@ class PattersRunner:
     @fancy_print
     def run_composite(self) -> None:
         """Run and Check Composite"""
+        # Create files
+        file1 = File("file1.txt")
+        file2 = File("file2.txt")
+
+        # Create directories
+        dir1 = Directory("dir1")
+        dir2 = Directory("dir2")
+
+        # Add files to directories
+        dir1.add(file1)
+        dir1.add(file2)
+
+        # Add a directory inside another directory
+        dir2.add(dir1)
+
+        # Display the file system structure
+        dir2.display()
 
     @fancy_print
     def run_decorator(self) -> None:
