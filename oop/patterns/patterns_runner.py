@@ -15,6 +15,7 @@ from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, Stripe
 from oop.patterns.structural.bridge import CreditCardPayment, CryptoPayment, CryptoProcessor
 from oop.patterns.structural.bridge import PayPalPayment as PayPalPaymentBridge
 from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
+from oop.patterns.structural.proxy import BankAccountProxy, RealBankAccount
 from oop.utils.decorators.fancy_print import fancy_print
 
 
@@ -29,6 +30,23 @@ class PattersRunner:
         self.run_prototype()
         self.run_builder()
         self.run_adapter()
+        self.run_proxy()
+
+    @fancy_print
+    def run_proxy(self) -> None:
+        """Run and Check Proxy"""
+        # Create a real bank account with an initial balance of $100
+        real_account = RealBankAccount(initial_balance=100.0)
+
+        # Create a proxy for the bank account with an unauthenticated user
+        proxy_unauthenticated = BankAccountProxy(real_account, user_authenticated=False)
+        proxy_unauthenticated.deposit(50.0)  # Output: Access denied. User is not authenticated.
+        proxy_unauthenticated.withdraw(20.0)  # Output: Access denied. User is not authenticated.
+
+        # Create a proxy for the bank account with an authenticated user
+        proxy_authenticated = BankAccountProxy(real_account, user_authenticated=True)
+        proxy_authenticated.deposit(50.0)  # Output: Deposited $50.0. New balance is $150.0.
+        proxy_authenticated.withdraw(20.0)  # Output: Withdrew $20.0. New balance is $130.0.
 
     @fancy_print
     def run_bridge(self) -> None:

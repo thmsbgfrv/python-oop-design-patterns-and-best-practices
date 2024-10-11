@@ -45,7 +45,3 @@ class TestPaymentSystem(unittest.TestCase):
         credit_card_payment = CreditCardPayment(card_number="1234-5678-9876-5432", processor=mock_processor)
         result = credit_card_payment.pay(100.0)
         self.assertEqual(result, "Using Credit Card 1234-5678-9876-5432: Mocked payment processing")
-
-
-if __name__ == "__main__":
-    unittest.main()
