@@ -15,6 +15,7 @@ from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, Stripe
 from oop.patterns.structural.bridge import CreditCardPayment, CryptoPayment, CryptoProcessor
 from oop.patterns.structural.bridge import PayPalPayment as PayPalPaymentBridge
 from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
+from oop.patterns.structural.facade import VideoStreamingFacade
 from oop.patterns.structural.proxy import BankAccountProxy, RealBankAccount
 from oop.utils.decorators.fancy_print import fancy_print
 
@@ -31,6 +32,29 @@ class PattersRunner:
         self.run_builder()
         self.run_adapter()
         self.run_proxy()
+        self.run_facade()
+        self.run_decorator()
+        self.run_composite()
+        self.run_flyweight()
+
+    @fancy_print
+    def run_flyweight(self) -> None:
+        """Run and Check FlyWeight"""
+
+    @fancy_print
+    def run_composite(self) -> None:
+        """Run and Check Composite"""
+
+    @fancy_print
+    def run_decorator(self) -> None:
+        """Run and Check Decorator"""
+
+    @fancy_print
+    def run_facade(self) -> None:
+        """Run and Check Facade"""
+        facade = VideoStreamingFacade()
+        facade.watch_video("user", "password", "1234")  # Should work
+        facade.watch_video("invalid_user", "wrong_password", "5678")  # Should fail
 
     @fancy_print
     def run_proxy(self) -> None:
