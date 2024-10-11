@@ -15,6 +15,7 @@ from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, Stripe
 from oop.patterns.structural.bridge import CreditCardPayment, CryptoPayment, CryptoProcessor
 from oop.patterns.structural.bridge import PayPalPayment as PayPalPaymentBridge
 from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
+from oop.patterns.structural.decorator import EmailNotification, Notification, SMSNotification
 from oop.patterns.structural.facade import VideoStreamingFacade
 from oop.patterns.structural.proxy import BankAccountProxy, RealBankAccount
 from oop.utils.decorators.fancy_print import fancy_print
@@ -48,6 +49,23 @@ class PattersRunner:
     @fancy_print
     def run_decorator(self) -> None:
         """Run and Check Decorator"""
+        # Create a basic notification
+        notification = Notification()
+        notification.send()
+
+        print("\n--- With Email Notification ---\n")
+        # Add email notification capability
+        email_notification = EmailNotification(notification)
+        email_notification.send()
+
+        print("\n--- With SMS Notification ---\n")
+        # Add SMS notification capability
+        sms_notification = SMSNotification(email_notification)
+        sms_notification.send()
+
+        print("\n--- With Combined Notification ---\n")
+        combined = SMSNotification(EmailNotification(notification))
+        combined.send()
 
     @fancy_print
     def run_facade(self) -> None:
