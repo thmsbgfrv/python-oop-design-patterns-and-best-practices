@@ -29,20 +29,76 @@ class PattersRunner:
     @fancy_print
     def run_all(self) -> None:
         """Run all Patterns Example Manual"""
-        self.run_singleton()
-        self.run_factory()
-        self.run_abstract_factory()
-        self.run_prototype()
-        self.run_builder()
-        self.run_adapter()
-        self.run_proxy()
-        self.run_facade()
-        self.run_decorator()
-        self.run_composite()
-        self.run_flyweight()
+        # creature
+        self.__run_singleton()
+        self.__run_factory()
+        self.__run_abstract_factory()
+        self.__run_prototype()
+        self.__run_builder()
+
+        # structure
+        self.__run_adapter()
+        self.__run_bridge()
+        self.__run_proxy()
+        self.__run_facade()
+        self.__run_decorator()
+        self.__run_composite()
+        self.__run_flyweight()
+
+        # behavioral
+        self.__run_chain()
+        self.__run_observer()
+        self.__run_strategy()
+        self.__run_command()
+        self.__run_iterator()
+        self.__run_state()
+        self.__run_memento()
+        self.__run_template()
+        self.__run_visitor()
+        self.__run_mediator()
 
     @fancy_print
-    def run_flyweight(self) -> None:
+    def __run_chain(self) -> None:
+        """Run and Check chain"""
+
+    @fancy_print
+    def __run_observer(self) -> None:
+        """Run and Check observer"""
+
+    @fancy_print
+    def __run_strategy(self) -> None:
+        """Run and Check strategy"""
+
+    @fancy_print
+    def __run_command(self) -> None:
+        """Run and Check command"""
+
+    @fancy_print
+    def __run_iterator(self) -> None:
+        """Run and Check iterator"""
+
+    @fancy_print
+    def __run_state(self) -> None:
+        """Run and Check state"""
+
+    @fancy_print
+    def __run_memento(self) -> None:
+        """Run and Check memento"""
+
+    @fancy_print
+    def __run_template(self) -> None:
+        """Run and Check template"""
+
+    @fancy_print
+    def __run_visitor(self) -> None:
+        """Run and Check visitor"""
+
+    @fancy_print
+    def __run_mediator(self) -> None:
+        """Run and Check mediator"""
+
+    @fancy_print
+    def __run_flyweight(self) -> None:
         """Run and Check FlyWeight"""
         factory = CharacterFactory()
 
@@ -61,7 +117,7 @@ class PattersRunner:
         print("Is char_a_red the same as char_a_red_again?", char_a_red is char_a_red_again)  # Should be True
 
     @fancy_print
-    def run_composite(self) -> None:
+    def __run_composite(self) -> None:
         """Run and Check Composite"""
         # Create files
         file1 = File("file1.txt")
@@ -82,7 +138,7 @@ class PattersRunner:
         dir2.display()
 
     @fancy_print
-    def run_decorator(self) -> None:
+    def __run_decorator(self) -> None:
         """Run and Check Decorator"""
         # Create a basic notification
         notification = Notification()
@@ -103,14 +159,14 @@ class PattersRunner:
         combined.send()
 
     @fancy_print
-    def run_facade(self) -> None:
+    def __run_facade(self) -> None:
         """Run and Check Facade"""
         facade = VideoStreamingFacade()
         facade.watch_video("user", "password", "1234")  # Should work
         facade.watch_video("invalid_user", "wrong_password", "5678")  # Should fail
 
     @fancy_print
-    def run_proxy(self) -> None:
+    def __run_proxy(self) -> None:
         """Run and Check Proxy"""
         # Create a real bank account with an initial balance of $100
         real_account = RealBankAccount(initial_balance=100.0)
@@ -126,7 +182,7 @@ class PattersRunner:
         proxy_authenticated.withdraw(20.0)  # Output: Withdrew $20.0. New balance is $130.0.
 
     @fancy_print
-    def run_bridge(self) -> None:
+    def __run_bridge(self) -> None:
         """Run and Check Bridge"""
         # Create a credit card payment with Stripe processor
         stripe_processor = StripeProcessor()
@@ -147,7 +203,7 @@ class PattersRunner:
         # Output: Using Wallet abc123wallet: Processing payment of $200.0 via CryptoAPI.
 
     @fancy_print
-    def run_adapter(self) -> None:
+    def __run_adapter(self) -> None:
         """Run and Check Adapter"""
 
         # Using PayPal
@@ -159,7 +215,7 @@ class PattersRunner:
         print(stripe_adapter.process_payment(75.0))  # Output: Stripe: Charged $75.00
 
     @fancy_print
-    def run_singleton(self) -> None:
+    def __run_singleton(self) -> None:
         """Run and Check Singleton"""
         # Testing Singleton
         print("Testing Singleton:")
@@ -181,7 +237,7 @@ class PattersRunner:
         print(f"Are singleton_threadsafe1 and singleton_threadsafe2 the same instance? -{answer}")
 
     @fancy_print
-    def run_factory(self) -> None:
+    def __run_factory(self) -> None:
         """Run and Check Factory"""
 
         def client_code(logistics: Logistics) -> None:
@@ -195,7 +251,7 @@ class PattersRunner:
         client_code(ShipLogistics())
 
     @fancy_print
-    def run_abstract_factory(self) -> None:
+    def __run_abstract_factory(self) -> None:
         """Run and Check Abstract Factory"""
 
         def client_code(factory: AbstractFactory) -> None:
@@ -217,7 +273,7 @@ class PattersRunner:
         client_code(SeaLogisticsFactory())
 
     @fancy_print
-    def run_prototype(self) -> None:
+    def __run_prototype(self) -> None:
         """Run and Check prototype"""
         circular_ref = SelfReferencingEntity()
         some_list_of_objects: list[int | set[int] | list[int]] = [1, {1, 2, 3}, [1, 2, 3]]
@@ -304,7 +360,7 @@ class PattersRunner:
         )
 
     @fancy_print
-    def run_builder(self) -> None:
+    def __run_builder(self) -> None:
         """Run builder design pattern"""
         car_builder: CarBuilder = CarBuilder()
         car: Car = (car_builder

@@ -56,7 +56,7 @@ known_first_party = [
 [tool.pylint]
 max-line-length = 120
 disable = [
-    "too-few-public-methods"
+    "too-few-public-methods",
 ]
 
 [tool.pytest.ini_options]
