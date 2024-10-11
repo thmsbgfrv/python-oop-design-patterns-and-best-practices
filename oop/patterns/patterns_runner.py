@@ -12,11 +12,15 @@ from oop.patterns.creational.prototype.prototype import SelfReferencingEntity, S
 from oop.patterns.creational.singleton.singleton_naive import SingletonNaive
 from oop.patterns.creational.singleton.singleton_naive_thread_safe import SingletonNaiveThreadSafe
 from oop.patterns.structural.adapter import PayPalAdapter, PayPalPayment, StripeAdapter, StripePayment
+from oop.patterns.structural.bridge import CreditCardPayment, CryptoPayment, CryptoProcessor
+from oop.patterns.structural.bridge import PayPalPayment as PayPalPaymentBridge
+from oop.patterns.structural.bridge import PayPalProcessor, StripeProcessor
 from oop.utils.decorators.fancy_print import fancy_print
 
 
 class PattersRunner:
     """PatternsRunner to run each pattern manually"""
+
     def run_all(self) -> None:
         """Run all Patterns Example Manual"""
         self.run_singleton()
@@ -25,6 +29,27 @@ class PattersRunner:
         self.run_prototype()
         self.run_builder()
         self.run_adapter()
+
+    @fancy_print
+    def run_bridge(self) -> None:
+        """Run and Check Bridge"""
+        # Create a credit card payment with Stripe processor
+        stripe_processor = StripeProcessor()
+        credit_card_payment = CreditCardPayment(card_number="1234-5678-9876-5432", processor=stripe_processor)
+        print(credit_card_payment.pay(100.0))
+        # Output: Using Credit Card 1234-5678-9876-5432: Processing payment of $100.0 via Stripe.
+
+        # Create a PayPal payment with PayPal processor
+        paypal_processor = PayPalProcessor()
+        paypal_payment = PayPalPaymentBridge(paypal_account="user@example.com", processor=paypal_processor)
+        print(paypal_payment.pay(50.0))
+        # Output: Using PayPal Account user@example.com: Processing payment of $50.0 via PayPal.
+
+        # Create a crypto payment with CryptoAPI processor
+        crypto_processor = CryptoProcessor()
+        crypto_payment = CryptoPayment(wallet_address="abc123wallet", processor=crypto_processor)
+        print(crypto_payment.pay(200.0))
+        # Output: Using Wallet abc123wallet: Processing payment of $200.0 via CryptoAPI.
 
     @fancy_print
     def run_adapter(self) -> None:

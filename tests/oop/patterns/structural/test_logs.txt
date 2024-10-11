@@ -1,0 +1,2 @@
+INFO: This is a test info message to a file.
+ERROR: This is a test error message to a file.
