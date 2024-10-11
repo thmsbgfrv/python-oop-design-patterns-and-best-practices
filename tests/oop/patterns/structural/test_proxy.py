@@ -38,3 +38,15 @@ class TestBankAccountProxy(unittest.TestCase):
         # Check the print output
         self.assertIn("Deposited $50.0. New balance is $150.0.", mock_stdout.getvalue())
         self.assertIn("Withdrew $20.0. New balance is $130.0.", mock_stdout.getvalue())
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_authenticated_access_insufficient_balance(self, mock_stdout: StringIO) -> None:
+        """Test that authenticated users can deposit and withdraw."""
+        real_account = RealBankAccount(initial_balance=50.0)
+        proxy = BankAccountProxy(real_account, user_authenticated=True)
+
+        # Attempt to withdraw from insufficient balance
+        proxy.withdraw(70.0)  # Expected output: Insufficient funds. Current balance: 50.0.
+
+        # Check the print output
+        self.assertIn("Insufficient funds. Current balance: $50.0.\n", mock_stdout.getvalue())
