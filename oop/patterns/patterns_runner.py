@@ -4,6 +4,7 @@ from typing import Any
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 from oop.patterns.behavioral.iterator import Book, MyBookCollection
+from oop.patterns.behavioral.mediator import ChatRoom, User
 from oop.patterns.behavioral.memento import TextEditor
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 from oop.patterns.behavioral.state import UserAccount
@@ -247,6 +248,20 @@ class PattersRunner:
     @fancy_print
     def __run_mediator(self) -> None:
         """Run and Check mediator"""
+        chat_room = ChatRoom()
+
+        user1 = User("Alice", chat_room)
+        user2 = User("Bob", chat_room)
+        user3 = User("Charlie", chat_room)
+
+        chat_room.add_colleague(user1)
+        chat_room.add_colleague(user2)
+        chat_room.add_colleague(user3)
+
+        user1.send("Hello, everyone!")
+        user2.send("Hi Alice!")
+        user3.send("Good to see you all!")
+        user1.send("How are you!")
 
     @fancy_print
     def __run_flyweight(self) -> None:
