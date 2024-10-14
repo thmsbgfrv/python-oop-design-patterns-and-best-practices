@@ -1,5 +1,6 @@
 """Runner Module to Test Manually Patterns"""
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
+from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 from oop.patterns.creational.abstract_factory.logistics import (
     AbstractFactory,
     RoadLogisticsFactory,
@@ -82,6 +83,34 @@ class PattersRunner:
     @fancy_print
     def __run_observer(self) -> None:
         """Run and Check observer"""
+        # Create the subject (observable)
+        subject = ConcreteSubject()
+
+        # Create two observers
+        observer1 = ConcreteObserver("Observer 1")
+        observer2 = ConcreteObserver("Observer 2")
+
+        # Attach observers to the subject
+        subject.attach(observer1)
+        subject.attach(observer2)
+
+        print("\n[State change to 10]")
+        # Change the state of the subject
+        subject.change_state(10)
+
+        print("\n[State change to 20]")
+        # Change the state again
+        subject.change_state(20)
+
+        print("\n[Detaching Observer 1 and changing state to 30]")
+        # Detach observer1 and change the state again
+        subject.detach(observer1)
+        subject.change_state(30)
+
+        print("\n[Attaching Observer 1 back and changing state to 40]")
+        # Attach observer1 back and change the state again
+        subject.attach(observer1)
+        subject.change_state(40)
 
     @fancy_print
     def __run_strategy(self) -> None:
