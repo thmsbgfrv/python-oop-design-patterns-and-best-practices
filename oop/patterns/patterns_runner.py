@@ -1,4 +1,5 @@
 """Runner Module to Test Manually Patterns"""
+from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 from oop.patterns.creational.abstract_factory.logistics import (
     AbstractFactory,
     RoadLogisticsFactory,
@@ -60,6 +61,23 @@ class PattersRunner:
     @fancy_print
     def __run_chain(self) -> None:
         """Run and Check chain"""
+        # Creating the handlers
+        low: LowLevelHandler = LowLevelHandler()
+        mid: MidLevelHandler = MidLevelHandler()
+        high: HighLevelHandler = HighLevelHandler()
+
+        # Setting up the chain: low -> mid -> high
+        low.set_next(mid).set_next(high)
+
+        # Test requests
+        requests: list[str] = ["low", "mid", "high", "unknown"]
+
+        for req in requests:
+            result: str | None = low.handle(req)
+            if result:
+                print(result)
+            else:
+                print(f"No handler found for {req}")
 
     @fancy_print
     def __run_observer(self) -> None:
