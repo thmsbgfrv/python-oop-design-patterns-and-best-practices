@@ -1,4 +1,6 @@
 """Runner Module to Test Manually Patterns"""
+from typing import Any
+
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 from oop.patterns.behavioral.iterator import Book, MyBookCollection
@@ -10,6 +12,7 @@ from oop.patterns.behavioral.strategy import CreditCardPayment as CCP
 from oop.patterns.behavioral.strategy import PaymentContext as PC
 from oop.patterns.behavioral.strategy import PayPalPayment as PPP
 from oop.patterns.behavioral.template import AdminAction, RegularUserAction
+from oop.patterns.behavioral.visitor import Clothing, DiscountVisitor, DisplayVisitor, Electronics
 from oop.patterns.creational.abstract_factory.logistics import (
     AbstractFactory,
     RoadLogisticsFactory,
@@ -223,6 +226,23 @@ class PattersRunner:
     @fancy_print
     def __run_visitor(self) -> None:
         """Run and Check visitor"""
+        products: list[Any] = [
+            Electronics(name="Smartphone", price=699.99),
+            Clothing(name="T-shirt", price=19.99),
+        ]
+
+        # Create visitors
+        display_visitor = DisplayVisitor()
+        discount_visitor = DiscountVisitor()
+
+        # Display product details
+        print("Product Details:")
+        for product in products:
+            product.accept(display_visitor)
+
+        print("\nProduct Discounts:")
+        for product in products:
+            product.accept(discount_visitor)
 
     @fancy_print
     def __run_mediator(self) -> None:
