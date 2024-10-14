@@ -1,6 +1,10 @@
 """Runner Module to Test Manually Patterns"""
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
+from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
+from oop.patterns.behavioral.strategy import CreditCardPayment as CCP
+from oop.patterns.behavioral.strategy import PaymentContext as PC
+from oop.patterns.behavioral.strategy import PayPalPayment as PPP
 from oop.patterns.creational.abstract_factory.logistics import (
     AbstractFactory,
     RoadLogisticsFactory,
@@ -115,6 +119,22 @@ class PattersRunner:
     @fancy_print
     def __run_strategy(self) -> None:
         """Run and Check strategy"""
+
+        # Example usage with different payment methods
+        # 1. Pay with Credit Card
+        credit_card_payment = CCP("1234-5678-9876-5432")
+        context = PC(credit_card_payment)
+        context.process_payment(100.0)
+
+        # 2. Pay with PayPal
+        paypal_payment = PPP("user@example.com")
+        context.set_strategy(paypal_payment)
+        context.process_payment(200.0)
+
+        # 3. Pay with Bank Transfer
+        bank_transfer_payment = BTP("AB123456789")
+        context.set_strategy(bank_transfer_payment)
+        context.process_payment(300.0)
 
     @fancy_print
     def __run_command(self) -> None:
