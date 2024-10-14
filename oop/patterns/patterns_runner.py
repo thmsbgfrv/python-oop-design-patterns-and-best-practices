@@ -1,5 +1,6 @@
 """Runner Module to Test Manually Patterns"""
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
+from oop.patterns.behavioral.iterator import Book, MyBookCollection
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
 from oop.patterns.behavioral.strategy import CreditCardPayment as CCP
@@ -143,6 +144,19 @@ class PattersRunner:
     @fancy_print
     def __run_iterator(self) -> None:
         """Run and Check iterator"""
+        # Create a book collection
+        collection = MyBookCollection()
+        collection.add_book(Book("1984", "George Orwell"))
+        collection.add_book(Book("To Kill a Mockingbird", "Harper Lee"))
+        collection.add_book(Book("The Great Gatsby", "F. Scott Fitzgerald"))
+
+        # Create an iterator for the book collection
+        iterator = collection.create_iterator()
+
+        # Use the iterator to print all books
+        while iterator.has_next():
+            book = iterator.next()
+            print(book)
 
     @fancy_print
     def __run_state(self) -> None:
