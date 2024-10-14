@@ -9,6 +9,7 @@ from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
 from oop.patterns.behavioral.strategy import CreditCardPayment as CCP
 from oop.patterns.behavioral.strategy import PaymentContext as PC
 from oop.patterns.behavioral.strategy import PayPalPayment as PPP
+from oop.patterns.behavioral.template import AdminAction, RegularUserAction
 from oop.patterns.creational.abstract_factory.logistics import (
     AbstractFactory,
     RoadLogisticsFactory,
@@ -211,6 +212,13 @@ class PattersRunner:
     @fancy_print
     def __run_template(self) -> None:
         """Run and Check template"""
+        print("Admin user:")
+        admin = AdminAction()
+        admin.perform_action()
+
+        print("\nRegular user:")
+        regular_user = RegularUserAction()
+        regular_user.perform_action()
 
     @fancy_print
     def __run_visitor(self) -> None:
