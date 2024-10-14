@@ -1,5 +1,6 @@
 """Runner Module to Test Manually Patterns"""
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
+from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 from oop.patterns.behavioral.iterator import Book, MyBookCollection
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
@@ -140,6 +141,24 @@ class PattersRunner:
     @fancy_print
     def __run_command(self) -> None:
         """Run and Check command"""
+        # Create an order
+        order = Order()
+
+        # Create commands for placing and canceling the order
+        place_order = PlaceOrderCommand(order)
+        cancel_order = CancelOrderCommand(order)
+
+        # Create an order invoker
+        invoker = OrderInvoker()
+
+        # Set commands
+        invoker.set_command(place_order)
+        invoker.press_button()  # Place the order
+
+        invoker.set_command(cancel_order)
+        invoker.press_button()  # Cancel the order
+
+        invoker.press_undo()  # Undo: Place the order again
 
     @fancy_print
     def __run_iterator(self) -> None:
