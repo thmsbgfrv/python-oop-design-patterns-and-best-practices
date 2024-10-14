@@ -2,6 +2,7 @@
 from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 from oop.patterns.behavioral.iterator import Book, MyBookCollection
+from oop.patterns.behavioral.memento import TextEditor
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 from oop.patterns.behavioral.state import UserAccount
 from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
@@ -193,6 +194,19 @@ class PattersRunner:
     @fancy_print
     def __run_memento(self) -> None:
         """Run and Check memento"""
+        editor = TextEditor()
+
+        editor.type("Hello, ")
+        editor.save()
+
+        editor.type("world!")
+        print("Current Text:", editor.get_text())  # Output: Hello, world!
+
+        editor.undo()
+        print("After Undo:", editor.get_text())  # Output: Hello,
+
+        editor.undo()  # No states to undo
+        print("After Second Undo:", editor.get_text())  # Output: Hello,
 
     @fancy_print
     def __run_template(self) -> None:
