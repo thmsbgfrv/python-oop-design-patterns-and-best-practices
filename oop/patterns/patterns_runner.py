@@ -3,6 +3,7 @@ from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, Mid
 from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 from oop.patterns.behavioral.iterator import Book, MyBookCollection
 from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
+from oop.patterns.behavioral.state import UserAccount
 from oop.patterns.behavioral.strategy import BankTransferPayment as BTP
 from oop.patterns.behavioral.strategy import CreditCardPayment as CCP
 from oop.patterns.behavioral.strategy import PaymentContext as PC
@@ -180,6 +181,14 @@ class PattersRunner:
     @fancy_print
     def __run_state(self) -> None:
         """Run and Check state"""
+        user_account = UserAccount()
+
+        # Cycle through the user account states
+        user_account.activate()  # Activating an active account
+        user_account.suspend()  # Suspending the account
+        user_account.activate()  # Activating a suspended account
+        user_account.deactivate()  # Deactivating an active account
+        user_account.suspend()  # Suspending an inactive account
 
     @fancy_print
     def __run_memento(self) -> None:
