@@ -1,7 +1,7 @@
 """Module of Ship Transport Method tests of Factory Design Pattern"""
 
-from oop.patterns.creational.factory.transport.ship_transport import ShipTransport
-from oop.patterns.creational.factory.transport.transport import Transport
+from src.oop.patterns.creational.factory.transport.ship_transport import ShipTransport
+from src.oop.patterns.creational.factory.transport.transport import Transport
 
 
 class TestShipTransport:
@@ -19,7 +19,7 @@ class TestShipTransport:
         ship: ShipTransport = ShipTransport()
 
         # assert if object is instance of ShipTransport
-        assert isinstance(ship, Transport), f'Expected {ship} to be instance of {Transport.__name__}'
+        assert isinstance(ship, Transport), f"Expected {ship} to be instance of {Transport.__name__}"
 
     def test_ship_transport_deliver(self) -> None:
         """Test if ship transport can deliver, and result."""

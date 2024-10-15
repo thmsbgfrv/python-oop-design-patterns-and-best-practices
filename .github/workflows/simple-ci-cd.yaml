@@ -35,19 +35,24 @@ jobs:
       # linters
       - name: Run linters
         run: |
+          poetry run black .
+          poetry run isort .
+          poetry run flake8 .
           poetry run pylint .
           poetry run mypy .
-          poetry run flake8 .
-          poetry run isort .
 
       # tests
-      - name: Run tests and coverage
+      - name: Run tests
+        run: poetry run pytest tests
+
+      # coverage
+      - name: Run coverage
         run: |
           poetry run coverage run -m pytest tests  # Run pytest tests
           poetry run coverage report -m  # Show coverage report
           poetry run coverage html  # Generate HTML coverage report
 
-      # coverage
+      # coverage report
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
         with:

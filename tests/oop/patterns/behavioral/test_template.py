@@ -1,14 +1,15 @@
 """Template tests module"""
+
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oop.patterns.behavioral.template import AdminAction, RegularUserAction
+from src.oop.patterns.behavioral.template import AdminAction, RegularUserAction
 
 
 class TestTemplateMethodPattern(unittest.TestCase):
     """Test cases for the Template Method Pattern."""
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_admin_action(self, mock_print: MagicMock) -> None:
         """Test the admin action."""
         admin_action = AdminAction()
@@ -22,7 +23,7 @@ class TestTemplateMethodPattern(unittest.TestCase):
         # Ensure the correct number of calls
         self.assertEqual(mock_print.call_count, 3)
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_regular_user_action(self, mock_print: MagicMock) -> None:
         """Test the regular user action."""
         user_action = RegularUserAction()

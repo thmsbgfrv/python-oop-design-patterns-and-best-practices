@@ -4,7 +4,7 @@
 Tests for the SingletonNaive class. With Naive Solution
 """
 
-from oop.patterns.creational.singleton.singleton_naive import Singleton, SingletonNaive, SingletonNaive2
+from src.oop.patterns.creational.singleton.singleton_naive import Singleton, SingletonNaive, SingletonNaive2
 
 
 class TestSingletonNaive:

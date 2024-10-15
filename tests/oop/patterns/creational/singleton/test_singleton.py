@@ -3,7 +3,7 @@
 Tests for the Singleton class.
 """
 
-from oop.patterns.creational.singleton.singleton import Singleton
+from src.oop.patterns.creational.singleton.singleton import Singleton
 
 
 class TestSingleton:

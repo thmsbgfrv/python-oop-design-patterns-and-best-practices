@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
+from src.oop.patterns.behavioral.command import CancelOrderCommand, Order, OrderInvoker, PlaceOrderCommand
 
 
 class TestCommandPattern(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestCommandPattern(unittest.TestCase):
         self.cancel_order = CancelOrderCommand(self.order)
         self.invoker = OrderInvoker()
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_place_order_command(self, mock_print: MagicMock) -> None:
         """Test executing the place order command."""
         self.invoker.set_command(self.place_order)
@@ -24,7 +24,7 @@ class TestCommandPattern(unittest.TestCase):
 
         mock_print.assert_called_once_with("Order has been placed.")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_cancel_order_command(self, mock_print: MagicMock) -> None:
         """Test executing the cancel order command."""
         self.invoker.set_command(self.cancel_order)
@@ -32,7 +32,7 @@ class TestCommandPattern(unittest.TestCase):
 
         mock_print.assert_called_once_with("Order has been canceled.")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_undo_command(self, mock_print: MagicMock) -> None:
         """Test undoing the last command executed."""
         self.invoker.set_command(self.place_order)

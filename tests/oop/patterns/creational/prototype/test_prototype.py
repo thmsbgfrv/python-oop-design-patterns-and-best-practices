@@ -1,11 +1,13 @@
 """Module to test prototype module classes and functions"""
+
 import unittest
 
-from oop.patterns.creational.prototype.prototype import SelfReferencingEntity, SomeComponent
+from src.oop.patterns.creational.prototype.prototype import SelfReferencingEntity, SomeComponent
 
 
 class TestSelfReferencingEntity(unittest.TestCase):
     """Test Class for SelfReferencingEntity"""
+
     component: SomeComponent
     circular_ref: SelfReferencingEntity
 
@@ -39,6 +41,7 @@ class TestSelfReferencingEntity(unittest.TestCase):
 
 class TestSomeComponent(unittest.TestCase):
     """Test Class for TestSomeComponent"""
+
     component: SomeComponent
     circular_ref: SelfReferencingEntity
     some_int: int
@@ -81,10 +84,14 @@ class TestSomeComponent(unittest.TestCase):
         self.assertEqual(shallow_copy.some_list_of_objects[2][-1], 10)  # type: ignore
 
         # test circular ref
-        self.assertEqual(id(shallow_copy.some_circular_ref),
-                         id(shallow_copy.some_circular_ref.parent.some_circular_ref))  # type: ignore
-        self.assertEqual(id(shallow_copy.some_circular_ref.parent),
-                         id(shallow_copy.some_circular_ref.parent.some_circular_ref.parent))  # type: ignore
+        self.assertEqual(
+            id(shallow_copy.some_circular_ref),
+            id(shallow_copy.some_circular_ref.parent.some_circular_ref),  # type: ignore
+        )
+        self.assertEqual(
+            id(shallow_copy.some_circular_ref.parent),
+            id(shallow_copy.some_circular_ref.parent.some_circular_ref.parent),  # type: ignore
+        )
 
     def test_clone(self) -> None:
         """Test  Clone to verify it works fine and as expected"""
@@ -111,7 +118,11 @@ class TestSomeComponent(unittest.TestCase):
         self.assertNotEqual(clone.some_list_of_objects[2][-1], 10)  # type: ignore
 
         # check circular ref
-        self.assertEqual(id(clone.some_circular_ref),
-                         id(clone.some_circular_ref.parent.some_circular_ref))  # type: ignore
-        self.assertEqual(id(clone.some_circular_ref.parent),
-                         id(clone.some_circular_ref.parent.some_circular_ref.parent))  # type: ignore
+        self.assertEqual(
+            id(clone.some_circular_ref),
+            id(clone.some_circular_ref.parent.some_circular_ref),  # type: ignore
+        )
+        self.assertEqual(
+            id(clone.some_circular_ref.parent),
+            id(clone.some_circular_ref.parent.some_circular_ref.parent),  # type: ignore
+        )

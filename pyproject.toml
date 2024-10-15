@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 pydantic = "^2.9.2"
-flake8 = "^7.1.1"
+
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
@@ -18,6 +18,8 @@ isort = "^5.13.2"
 black = "^24.8.0"
 pytest = "^8.3.3"  # Kept here as a dev dependency
 coverage = "^7.6.1"
+build = "^1.2.2.post1"
+flake8 = "^7.1.1"
 
 [build-system]
 requires = ["poetry-core"]

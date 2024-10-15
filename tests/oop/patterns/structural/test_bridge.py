@@ -1,8 +1,9 @@
 """Test module for bridge.py"""
+
 import unittest
 from unittest.mock import MagicMock
 
-from oop.patterns.structural.bridge import (
+from src.oop.patterns.structural.bridge import (
     CreditCardPayment,
     CryptoPayment,
     CryptoProcessor,

@@ -12,7 +12,7 @@ Classes:
 
 import unittest
 
-from oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
+from src.oop.patterns.behavioral.chain import HighLevelHandler, LowLevelHandler, MidLevelHandler
 
 
 class TestChainOfResponsibility(unittest.TestCase):

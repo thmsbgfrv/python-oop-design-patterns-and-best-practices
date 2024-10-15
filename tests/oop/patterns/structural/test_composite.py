@@ -1,16 +1,17 @@
 """Module Composite Tests"""
+
 import unittest
 from io import StringIO
 from typing import Any
 from unittest.mock import patch
 
-from oop.patterns.structural.composite import Directory, File
+from src.oop.patterns.structural.composite import Directory, File
 
 
 class TestFileSystem(unittest.TestCase):
     """Test cases for the File System Composite pattern."""
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_file_display(self, mock_stdout: Any) -> None:
         """Test displaying a single file."""
         file = File("test_file.txt")
@@ -18,7 +19,7 @@ class TestFileSystem(unittest.TestCase):
         output = mock_stdout.getvalue().strip()
         self.assertEqual(output, "File: test_file.txt")
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_directory_display(self, mock_stdout: Any) -> None:
         """Test displaying a directory with files."""
         dir1 = Directory("test_directory")
@@ -31,7 +32,7 @@ class TestFileSystem(unittest.TestCase):
         output = mock_stdout.getvalue().strip()
         self.assertEqual(output, "Directory: test_directory\n  File: file1.txt\n  File: file2.txt")
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_nested_directory_display(self, mock_stdout: Any) -> None:
         """Test displaying a nested directory structure."""
         root = Directory("root")

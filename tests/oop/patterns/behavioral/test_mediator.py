@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oop.patterns.behavioral.mediator import ChatRoom, User
+from src.oop.patterns.behavioral.mediator import ChatRoom, User
 
 
 class TestMediatorPattern(unittest.TestCase):
@@ -17,13 +17,13 @@ class TestMediatorPattern(unittest.TestCase):
         self.chat_room.add_colleague(self.user1)
         self.chat_room.add_colleague(self.user2)
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_user_send_message(self, mock_print: MagicMock) -> None:
         """Test if a user can send a message."""
         self.user1.send("Hello, Bob!")
         mock_print.assert_called_with("Bob: Received message: Hello, Bob!")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_user_receive_message(self, mock_print: MagicMock) -> None:
         """Test if a user receives a message correctly."""
         self.user1.send("Hello, Bob!")
@@ -32,7 +32,7 @@ class TestMediatorPattern(unittest.TestCase):
         mock_print.assert_any_call("Alice: Received message: Hi Alice!")
         mock_print.assert_any_call("Bob: Received message: Hello, Bob!")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_multiple_users_send_message(self, mock_print: MagicMock) -> None:
         """Test multiple users sending messages."""
         self.user1.send("Hello everyone!")
@@ -41,7 +41,7 @@ class TestMediatorPattern(unittest.TestCase):
         mock_print.assert_any_call("Alice: Received message: Hi there!")
         mock_print.assert_any_call("Bob: Received message: Hello everyone!")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_no_message_sent_to_sender(self, mock_print: MagicMock) -> None:
         """Test that a user does not receive their own message."""
         self.user1.send("Hello everyone!")

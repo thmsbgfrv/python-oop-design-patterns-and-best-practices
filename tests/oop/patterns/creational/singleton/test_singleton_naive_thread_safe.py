@@ -7,7 +7,7 @@ Tests for the Singleton with naive and Thread Safe Solution
 from threading import Thread
 from typing import List
 
-from oop.patterns.creational.singleton.singleton_naive_thread_safe import (
+from src.oop.patterns.creational.singleton.singleton_naive_thread_safe import (
     Singleton,
     SingletonNaiveThreadSafe,
     SingletonNaiveThreadSafe2,
@@ -18,6 +18,7 @@ class TestSingletonNaiveThreadSafeThreadSafe:
     """
     Test suite for the SingletonNaiveThreadSafeThreadSafe based (Singleton).
     """
+
     @classmethod
     def setup_method(cls) -> None:
         """Reset Singletons before each test"""
@@ -62,7 +63,7 @@ class TestSingletonNaiveThreadSafeThreadSafe:
         assert instance2.name == "Second"
 
     def test_thread_safe(self) -> None:
-        """Test that SingletonNaiveThreadSafe is thread-safe. """
+        """Test that SingletonNaiveThreadSafe is thread-safe."""
         instance_list: List[SingletonNaiveThreadSafe] = []
 
         def create_instance(name: str) -> None:
@@ -72,7 +73,7 @@ class TestSingletonNaiveThreadSafeThreadSafe:
         threads: List[Thread] = []
 
         for i in range(10):  # create 10 threads
-            thread = Thread(target=create_instance, args=(f'Instance {i}',))
+            thread = Thread(target=create_instance, args=(f"Instance {i}",))
             threads.append(thread)
             thread.start()
 

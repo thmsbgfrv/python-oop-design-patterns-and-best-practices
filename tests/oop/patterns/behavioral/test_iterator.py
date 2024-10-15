@@ -2,7 +2,7 @@
 
 import unittest
 
-from oop.patterns.behavioral.iterator import Book, MyBookCollection
+from src.oop.patterns.behavioral.iterator import Book, MyBookCollection
 
 
 class TestMyBookCollection(unittest.TestCase):

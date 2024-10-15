@@ -9,13 +9,13 @@ import unittest
 from io import StringIO
 from unittest.mock import patch
 
-from oop.patterns.behavioral.strategy import BankTransferPayment, CreditCardPayment, PaymentContext, PayPalPayment
+from src.oop.patterns.behavioral.strategy import BankTransferPayment, CreditCardPayment, PaymentContext, PayPalPayment
 
 
 class TestStrategyPattern(unittest.TestCase):
     """Unit tests for the Strategy Pattern implementation."""
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_credit_card_payment(self, mock_stdout: StringIO) -> None:
         """Test payment with a credit card strategy."""
         strategy = CreditCardPayment("1111-2222-3333-4444")
@@ -25,7 +25,7 @@ class TestStrategyPattern(unittest.TestCase):
         # Assert print output
         self.assertIn("Processing credit card payment of $150.0 using card 1111-2222-3333-4444", mock_stdout.getvalue())
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_paypal_payment(self, mock_stdout: StringIO) -> None:
         """Test payment with a PayPal strategy."""
         strategy = PayPalPayment("user@paypal.com")
@@ -33,10 +33,11 @@ class TestStrategyPattern(unittest.TestCase):
         context.process_payment(250.0)
 
         # Assert print output
-        self.assertIn("Processing PayPal payment of $250.0 using PayPal account user@paypal.com",
-                      mock_stdout.getvalue())
+        self.assertIn(
+            "Processing PayPal payment of $250.0 using PayPal account user@paypal.com", mock_stdout.getvalue()
+        )
 
-    @patch('sys.stdout', new_callable=StringIO)
+    @patch("sys.stdout", new_callable=StringIO)
     def test_bank_transfer_payment(self, mock_stdout: StringIO) -> None:
         """Test payment with a bank transfer strategy."""
         strategy = BankTransferPayment("AB123456789")

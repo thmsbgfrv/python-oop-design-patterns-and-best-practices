@@ -1,7 +1,14 @@
 """Tests of Adapter.py"""
+
 import unittest
 
-from oop.patterns.structural.adapter import PaymentProcessor, PayPalAdapter, PayPalPayment, StripeAdapter, StripePayment
+from src.oop.patterns.structural.adapter import (
+    PaymentProcessor,
+    PayPalAdapter,
+    PayPalPayment,
+    StripeAdapter,
+    StripePayment,
+)
 
 
 class TestPaymentAdapter(unittest.TestCase):

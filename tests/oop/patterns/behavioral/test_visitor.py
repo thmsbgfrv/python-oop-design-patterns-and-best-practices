@@ -3,13 +3,13 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oop.patterns.behavioral.visitor import Clothing, DiscountVisitor, DisplayVisitor, Electronics
+from src.oop.patterns.behavioral.visitor import Clothing, DiscountVisitor, DisplayVisitor, Electronics
 
 
 class TestVisitorPattern(unittest.TestCase):
     """Tests for the Visitor Pattern implementations."""
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_display_visitor(self, mock_print: MagicMock) -> None:
         """Test the DisplayVisitor's output for products."""
         electronics = Electronics(name="Smartphone", price=699.99)
@@ -23,7 +23,7 @@ class TestVisitorPattern(unittest.TestCase):
         mock_print.assert_any_call("Electronics - Name: Smartphone, Price: 699.99")
         mock_print.assert_any_call("Clothing - Name: T-shirt, Price: 19.99")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_discount_visitor(self, mock_print: MagicMock) -> None:
         """Test the DiscountVisitor's output for products."""
         electronics = Electronics(name="Smartphone", price=100.00)

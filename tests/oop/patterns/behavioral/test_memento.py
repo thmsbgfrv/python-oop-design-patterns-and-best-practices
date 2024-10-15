@@ -1,8 +1,9 @@
 """Memento module tests"""
+
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oop.patterns.behavioral.memento import TextEditor
+from src.oop.patterns.behavioral.memento import TextEditor
 
 
 class TestTextEditor(unittest.TestCase):
@@ -30,7 +31,7 @@ class TestTextEditor(unittest.TestCase):
         self.editor.undo()
         self.assertEqual(self.editor.get_text(), "")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_undo_without_states(self, mock_print: MagicMock) -> None:
         """Test undoing when there are no saved states."""
         self.editor.undo()
@@ -51,7 +52,7 @@ class TestTextEditor(unittest.TestCase):
         self.editor.undo()  # Undo "Hello, "
         self.assertEqual(self.editor.get_text(), "")
 
-    @patch('builtins.print')
+    @patch("builtins.print")
     def test_undo_after_multiple_undos(self, mock_print: MagicMock) -> None:
         """Test undoing after multiple undos gives proper message."""
         self.editor.type("Hello, ")

@@ -1,9 +1,10 @@
 """Test fancy_print decorator"""
+
 import unittest
 from contextlib import redirect_stdout
 from io import StringIO
 
-from oop.utils.decorators.fancy_print import fancy_print
+from src.oop.utils.decorators.fancy_print import fancy_print
 
 
 class MyClass:

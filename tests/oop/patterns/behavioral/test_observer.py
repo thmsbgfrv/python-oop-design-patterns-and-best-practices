@@ -7,7 +7,7 @@ the observers receive the correct state updates from the subject.
 
 import unittest
 
-from oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
+from src.oop.patterns.behavioral.observer import ConcreteObserver, ConcreteSubject
 
 # pylint: disable=W0212
 
