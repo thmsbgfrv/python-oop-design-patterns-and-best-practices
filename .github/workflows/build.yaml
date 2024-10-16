@@ -64,20 +64,27 @@ jobs:
       - name: Build project with Poetry
         run: poetry build
 
+      # Extract version name from the tag
+      - name: Extract version name
+        id: get_version
+        run: |
+          version_name=${GITHUB_REF#refs/tags/}  # Extract version name
+          echo "version=$version_name" >> $GITHUB_ENV  # Set version in environment variable
+
       # Read CHANGELOG.md for release notes
       - name: Read CHANGELOG.md
         id: changelog
         run: |
-          echo "Reading latest changelog entry"
-          echo "::set-output name=body::$(awk '/^---/{exit} {print}' CHANGELOG.md)"  # Get all lines until the first `---`
+          changelog_body=$(awk '/^---/{exit} {print}' CHANGELOG.md)  # Get all lines until the first `---`
+          echo "body=$changelog_body" >> $GITHUB_ENV  # Set changelog in environment variable
 
       # Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref }}  # Use the tag name for the release
-          release_name: "Release ${{ github.ref }}"  # Name of the release
-          body: ${{ steps.changelog.outputs.body }}  # Use the changelog output as the release body
+          release_name: "Release ${{ env.version }}"  # Name of the release using the extracted version
+          body: ${{ env.body }}  # Use the changelog output as the release body
           files: dist/*  # Upload the built files (sdist and wheel files)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure the token is correct
