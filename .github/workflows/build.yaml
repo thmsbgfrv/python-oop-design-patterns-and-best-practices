@@ -65,19 +65,17 @@ jobs:
         run: poetry build
 
       # Extract version name from the tag
-      - name: Extract version name
-        id: get_version
+      - name: Extract Version Name
+        id: extract_version
         run: |
-          version_name=${GITHUB_REF#refs/tags/}  # Extract version name
-          echo "version=$version_name" >> $GITHUB_ENV  # Set version in environment variable
+          VERSION=${GITHUB_REF##*/}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV  # Set the version in the environment variable
 
       # Read CHANGELOG.md for release notes
       - name: Read CHANGELOG.md
         id: changelog
         run: |
           changelog_body=$(awk '/^---/{exit} {print}' CHANGELOG.md)  # Get all lines until the first `---`
-
-          # Use Here-Document syntax to set the body variable in a way GitHub Actions can handle
           echo "changelog_body<<EOF" >> $GITHUB_ENV
           echo "$changelog_body" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -86,8 +84,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}  # Use the tag name for the release
-          release_name: "Release ${{ env.version }}"  # Name of the release using the extracted version
+          tag_name: ${{ github.ref }}  # Use the full ref name for the release
+          name: ${{ env.VERSION }}  # Name of the release without the refs/tags prefix
           body: ${{ env.changelog_body }}  # Use the changelog output as the release body
           files: dist/*  # Upload the built files (sdist and wheel files)
         env:
