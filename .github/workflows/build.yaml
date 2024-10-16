@@ -76,7 +76,11 @@ jobs:
         id: changelog
         run: |
           changelog_body=$(awk '/^---/{exit} {print}' CHANGELOG.md)  # Get all lines until the first `---`
-          echo "body=$changelog_body" >> $GITHUB_ENV  # Set changelog in environment variable
+
+          # Use Here-Document syntax to set the body variable in a way GitHub Actions can handle
+          echo "changelog_body<<EOF" >> $GITHUB_ENV
+          echo "$changelog_body" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       # Create GitHub Release
       - name: Create GitHub Release
