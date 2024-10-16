@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  pre-commit-linter-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: poetry install
+      # pre-commit
+      - name: Run pre-commit hooks
+        run: poetry run pre-commit run --all-files
+      # linters
+      - name: Run linters
+        run: |
+          poetry run black .
+          poetry run isort .
+          poetry run flake8 .
+          poetry run pylint .
+          poetry run mypy .
+
+      # tests
+      - name: Run tests
+        run: poetry run pytest tests
+
+      # coverage
+      - name: Run coverage
+        run: |
+          poetry run coverage run -m pytest tests  # Run pytest tests
+          poetry run coverage report -m  # Show coverage report
+          poetry run coverage html  # Generate HTML coverage report
+
+      # coverage report
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/  # Path to the HTML coverage report
+
+      - name: Build project with Poetry
+        run: poetry build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*  # Upload the built files (sdist and wheel files)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
