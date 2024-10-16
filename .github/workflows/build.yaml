@@ -1,4 +1,4 @@
-name: CI
+name: Build and Release
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - 'v*'
 
 permissions:
-  contents: write
+  contents: write  # Allow write access to repository contents
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -27,10 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
-      # pre-commit
+
+      # Run pre-commit hooks
       - name: Run pre-commit hooks
         run: poetry run pre-commit run --all-files
-      # linters
+
+      # Run linters
       - name: Run linters
         run: |
           poetry run black .
@@ -39,30 +42,42 @@ jobs:
           poetry run pylint .
           poetry run mypy .
 
-      # tests
+      # Run tests
       - name: Run tests
         run: poetry run pytest tests
 
-      # coverage
+      # Run coverage
       - name: Run coverage
         run: |
           poetry run coverage run -m pytest tests  # Run pytest tests
           poetry run coverage report -m  # Show coverage report
           poetry run coverage html  # Generate HTML coverage report
 
-      # coverage report
+      # Upload HTML Report
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: htmlcov/  # Path to the HTML coverage report
 
+      # Build project with Poetry
       - name: Build project with Poetry
         run: poetry build
 
+      # Read CHANGELOG.md for release notes
+      - name: Read CHANGELOG.md
+        id: changelog
+        run: |
+          echo "Reading latest changelog entry"
+          echo "::set-output name=body::$(awk '/^---/{exit} {print}' CHANGELOG.md)"  # Get all lines until the first `---`
+
+      # Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.ref }}  # Use the tag name for the release
+          release_name: "Release ${{ github.ref }}"  # Name of the release
+          body: ${{ steps.changelog.outputs.body }}  # Use the changelog output as the release body
           files: dist/*  # Upload the built files (sdist and wheel files)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure the token is correct
