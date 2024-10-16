@@ -2,7 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.0] - 2024-10-30
+## [0.3.1] - 2024-10-30
+### Added
+-
+
+### Changed
+- Github CI/CD build yaml
+
+### Fixed
+- Automated release message, name, changelog.
+
+---
+
+## [0.3.0] - 2024-10-30
 ### Added
 - Changelog.md file to add changes.
 
