@@ -4,8 +4,12 @@ on:
   push:
     tags:
       - 'v*'
+
+permissions:
+  contents: write
+
 jobs:
-  pre-commit-linter-tests:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
