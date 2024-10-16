@@ -14,9 +14,9 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [0.3.0] - 2024-10-30
+## [0.3.8] - 2024-10-30
 ### Added
-- Changelog.md file to add changes.
+- Changelog.md file to add changes.v3
 
 ### Changed
 - Build Automation changed, added auto release notes from changelog.md
