@@ -6,19 +6,41 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "python.pythonPath": "/usr/local/bin/python"
+        "python.defaultInterpreterPath": "/workspace/python-study/.venv/bin/python",
+        "terminal.integrated.env.linux": {
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "files.exclude": {
+          "__pycache__": true,
+          "**/__pycache__": true
+        },
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always",
+          "source.fixAll": "always"
+        },
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
       },
       "extensions": [
         "ms-python.python",
         "ms-azuretools.vscode-docker",
-        "esbenp.prettier-vscode",
-        "eamodio.gitlens",
         "redhat.vscode-yaml",
-        "ms-vscode-remote.remote-containers"
+        "ms-vscode-remote.remote-containers",
+        "ms-python.pylint",
+        "ms-python.flake8",
+        "ms-python.mypy-type-checker",
+        "ms-python.black-formatter",
+        "esbenp.prettier-vscode",
+        "ms-python.isort"
       ]
     }
   },
-  "postCreateCommand": "git config --global --add safe.directory /workspaces/python-study && git pull && poetry install && pre-commit run --all-files",
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/python-study && poetry install && ./.venv/bin/pre-commit install",
   "remoteUser": "vscode",
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",

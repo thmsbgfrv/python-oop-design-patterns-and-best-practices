@@ -24,8 +24,8 @@ USER vscode
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Install pre-commit
-RUN pip install pre-commit
+# Configure Poetry to create virtual environments in the project directory
+RUN poetry config virtualenvs.in-project true
 
 # Create a shell entry point for bash
 ENTRYPOINT ["/bin/bash"]
