@@ -14,6 +14,9 @@
           "__pycache__": true,
           "**/__pycache__": true
         },
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": false,
+        "files.trimTrailingWhitespace": true,
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
           "source.organizeImports": "always",
@@ -27,10 +30,10 @@
         }
       },
       "extensions": [
-        "ms-python.python",
-        "ms-azuretools.vscode-docker",
-        "redhat.vscode-yaml",
         "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "redhat.vscode-yaml",
         "ms-python.pylint",
         "ms-python.flake8",
         "ms-python.mypy-type-checker",
@@ -40,7 +43,7 @@
       ]
     }
   },
-  "postCreateCommand": "git config --global --add safe.directory /workspaces/python-study && poetry install && ./.venv/bin/pre-commit install",
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/python-study && poetry install &&  /workspaces/python-study/.venv/bin/pre-commit install",
   "remoteUser": "vscode",
   "mounts": [
     "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
