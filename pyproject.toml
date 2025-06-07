@@ -2,7 +2,7 @@
 name = "python-study"
 version = "0.3.8"
 description = ""
-authors = ["Tahnasib Gafarov <tahnasibgafarov@gmail.com>"]
+authors = ["Local Python <python@localhost.com>"]
 readme = "README.md"
 packages = [
     { include = "src" },
